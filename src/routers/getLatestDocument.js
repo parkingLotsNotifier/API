@@ -9,7 +9,7 @@ module.exports = async (req,res)=>{
         res.status(200).json(latestDocument);  
          }
          catch(err){
-            ogger.error(`from getStoredDocument : ${JSON.status()}`) 
+            logger.error(`from getStoredDocument : ${JSON.status()}`) 
             res.status(500).json({err: err.message});
          }
  
