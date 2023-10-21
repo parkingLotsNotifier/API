@@ -21,6 +21,8 @@
     "fs": "^0.0.1-security",
     "mongoose": "^6.3.4",
     "node-schedule": "^2.1.1",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "winston": "^3.11.0",
+    "winston-slack-webhook-transport": "^2.3.2"
   }
 }

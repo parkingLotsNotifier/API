@@ -2,19 +2,22 @@ const util = require('util');
 const schedule = require('node-schedule');
 const getLatestDocument = require('../query/QueryLatestDocument');
 const { setLatestDocument } = require('../controller/DocumentStorage');
+const {createLogger} = require('../logger/logger')
+
+let logger= createLogger("scheduleQuery");
 
 function scheduleQuery() {
   const job = schedule.scheduleJob('*/1 * * * *', async function() {
     try {
       const latestDocument = await getLatestDocument();
       if (latestDocument) {
-        console.log(util.inspect(latestDocument, { depth: null }));
+        logger.info(util.inspect(latestDocument, { depth: null }));
         setLatestDocument(latestDocument);  // Update the stored document
       } else {
-        console.log('No documents found.');
+        logger.error('No documents found.');
       }
     } catch (error) {
-      console.error('Error in scheduled job:', error);
+      logger.error('Error in scheduled job:', error);
     }
   });
 }
