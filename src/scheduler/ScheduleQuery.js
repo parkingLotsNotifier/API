@@ -12,6 +12,7 @@ function scheduleQuery() {
       const latestDocument = await getLatestDocument();
       if (latestDocument) {
         logger.info(util.inspect(latestDocument, { depth: null }));
+        console.log(util.inspect(latestDocument, { depth: null }));
         setLatestDocument(latestDocument);  // Update the stored document
       } else {
         logger.error('No documents found.');
