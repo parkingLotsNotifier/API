@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { PORT, DB_USERNAME, DB_PASSWORD, DB_HOST, ...rest } = require('../config/env');
-const database = require('../config/database');
-const router = require('./routers');
-const {scheduleQuery} = require('../src/scheduler/ScheduleQuery');
+const { PORT, DB_USERNAME, DB_PASSWORD, DB_HOST, ...rest } = require('./config/env');
+const database = require('./config/database');
+const router = require('./src/routers');
+const {scheduleQuery} = require('./src/scheduler/ScheduleQuery');
 const cors = require('cors');
 
 let latestDocument = null;
