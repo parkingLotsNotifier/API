@@ -1,4 +1,4 @@
-const {ParkingLots,Predictions} = require('../module/parkingLots');
+const {ParkingLots,Predictions} = require('../models/parkingLots');
 
 async function getLatestDocument() {
 
