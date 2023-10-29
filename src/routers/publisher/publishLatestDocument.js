@@ -1,7 +1,8 @@
-const {getStoredDocument} = require('../controller/DocumentStorage')
-const {createLogger} = require('../logger/logger')
+const {getStoredDocument} = require('../../controller/DocumentStorage')
+const {createLogger} = require('../../logger/logger')
 
-let logger= createLogger("getStoredDocument");
+
+let logger= createLogger("publishStoredDocument");
 module.exports = async (req,res)=>{ 
     try{
         const latestDocument = await getStoredDocument();

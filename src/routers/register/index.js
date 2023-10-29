@@ -2,14 +2,13 @@ const express = require('express');
 
 
 const welcome=require(`./welcome`);
-const getLatestDocument = require(`./getLatestDocument`)
+const register = require('./register')
 const router = express.Router();
 
-//the available endpoints users/...
+//the available endpoints auth/...
 
 router.get(`/`,welcome);
-router.get('/api/getLatestDocument',getLatestDocument)
-
+router.post('/register',register);
 module.exports = router;
 
 

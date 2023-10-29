@@ -19,10 +19,13 @@
     "express": "^4.18.1",
     "express-fileupload": "^1.4.0",
     "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^6.3.4",
     "node-schedule": "^2.1.1",
     "nodemon": "^3.0.1",
     "winston": "^3.11.0",
-    "winston-slack-webhook-transport": "^2.3.2"
+    "winston-slack-webhook-transport": "^2.3.2",
+    "ws": "^8.14.2"
   }
 }

@@ -12,6 +12,7 @@ const env = {
             GMAIL_USERNAME : process.env.GMAIL_USERNAME,
             MAIL_DEST : process.env.MAIL_DEST,
             MAIL_SOURCE : process.env.MAIL_SOURCE,
-            CHAT_ID : process.env.CHAT_ID
+            CHAT_ID : process.env.CHAT_ID,
+            ACCESS_TOKEN_SECRET : process.env.ACCESS_TOKEN_SECRET
             };
 module.exports=env;
