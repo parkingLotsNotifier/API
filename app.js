@@ -57,15 +57,15 @@ database.connect(DB_USERNAME, DB_PASSWORD, DB_HOST).then(() => {
   function logReadable(change) {
     if (change.fullDocument && Array.isArray(change.fullDocument.slots)) {
       const formattedSlots = change.fullDocument.slots.map((slot) => ({
-        Lot_Name: slot.lot_name,
+        Lot_Name: slot.lot_name ?? "Undifind",
         Cropped_Photo_Id_Num: parseInt(
-          slot.filename.match(/_(\d+)\.jpg/)[1],
+          slot.filename?.match(/_(\d+)\.jpg/ || [])[1] ?? NaN,
           10
         ),
-        Prediction_Class: slot.prediction.class,
-        Confidence: parseFloat(slot.prediction.confidence).toFixed(2),
-        Coords: [slot.coordinate.x1, slot.coordinate.y1],
-        Width_Height: [slot.coordinate.w, slot.coordinate.h],
+        Prediction_Class: slot.prediction?.class ?? "Undifind",
+        Confidence: parseFloat(slot.prediction?.confidence ?? NaN).toFixed(2),
+        Coords: [slot.coordinate?.x1 ?? NaN, slot.coordinate?.y1 ?? NaN],
+        Width_Height: [slot.coordinate?.w ?? NaN, slot.coordinate?.h ?? NaN],
       }));
 
       // Sort the data by 'Lot_Name' and 'Cropped_Photo_Id_Num'
