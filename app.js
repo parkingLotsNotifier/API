@@ -79,6 +79,8 @@ database.connect(DB_USERNAME, DB_PASSWORD, DB_HOST).then(() => {
         }
       });
 
+        
+
       // Manually move 'B10' to the end of the array
       const b10Index = formattedSlots.findIndex(
         (slot) => slot.Lot_Name === "B10"
@@ -110,13 +112,27 @@ database.connect(DB_USERNAME, DB_PASSWORD, DB_HOST).then(() => {
     }
   }
 
+  // Define the logDivider function
+  function logDivider(patternLength) {
+    // Initialize an empty string to store the pattern
+    let pattern = "";
+
+    // Use a loop to generate the pattern
+    for (let i = 0; i < patternLength; i++) {
+      // Alternate between ⬜ and ⬛ based on even or odd index
+      pattern += i % 2 === 0 ? "⬜" : "⬛";
+    }
+
+    // Print the generated pattern
+    console.log(pattern);
+  }
+
   watchCollection((change) => {
     logReadable(change);
+    logDivider(50);
     logger.info(util.inspect(change, { depth: null }));
     //console.log(util.inspect(change, { depth: null })); PRINTS TWICE FOR NO REASON
-    console.log(
-      "⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛⬜⬛"
-    );
+    
     wss.clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(JSON.stringify(change));
