@@ -17,13 +17,13 @@ const { createLogger } = require("./src/logger/logger");
 const { setLatestDocument } = require("./src/controller/DocumentStorage");
 const {
   authenticateTokenHTTP,
-} = require("./src/autentication/autenticationHTTP");
+} = require("./src/authentication/authenticateHTTP");
 const logger = createLogger("app");
 const http = require("http");
 const WebSocket = require("ws");
 const {
   authenticateTokenWebSock,
-} = require("./src/autentication/authenticateWebSock");
+} = require("./src/authentication/authenticateWebSock");
 
 database.connect(DB_USERNAME, DB_PASSWORD, DB_HOST).then(() => {
   const app = express();
