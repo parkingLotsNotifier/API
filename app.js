@@ -57,9 +57,9 @@ database.connect(DB_USERNAME, DB_PASSWORD, DB_HOST).then(() => {
   function logReadable(change) {
     if (change.fullDocument && Array.isArray(change.fullDocument.slots)) {
       const formattedSlots = change.fullDocument.slots.map((slot) => ({
-        Lot_Name: slot.lot_name ?? "Undifind",
+        lotName: slot.lotName ?? "Undifind",
         Cropped_Photo_Id_Num: parseInt(
-          slot.filename?.match(/_(\d+)\.jpg/ || [])[1] ?? NaN,
+          slot.fileName?.match(/_(\d+)\.jpg/ || [])[1] ?? NaN,
           10
         ),
         Prediction_Class: slot.prediction?.class ?? "Undifind",
@@ -68,13 +68,13 @@ database.connect(DB_USERNAME, DB_PASSWORD, DB_HOST).then(() => {
         Width_Height: [slot.coordinate?.w ?? NaN, slot.coordinate?.h ?? NaN],
       }));
 
-      // Sort the data by 'Lot_Name' and 'Cropped_Photo_Id_Num'
+      // Sort the data by 'lotName' and 'Cropped_Photo_Id_Num'
       formattedSlots.sort((a, b) => {
-        if (a.Lot_Name[0] === "A" && b.Lot_Name[0] === "B") return -1;
-        if (a.Lot_Name[0] === "B" && b.Lot_Name[0] === "A") return 1;
-        if (a.Lot_Name < b.Lot_Name) return -1;
-        if (a.Lot_Name > b.Lot_Name) return 1;
-        if (a.Lot_Name === b.Lot_Name) {
+        if (a.lotName[0] === "A" && b.lotName[0] === "B") return -1;
+        if (a.lotName[0] === "B" && b.lotName[0] === "A") return 1;
+        if (a.lotName < b.lotName) return -1;
+        if (a.lotName > b.lotName) return 1;
+        if (a.lotName === b.lotName) {
           return a.Cropped_Photo_Id_Num - b.Cropped_Photo_Id_Num;
         }
       });
@@ -83,7 +83,7 @@ database.connect(DB_USERNAME, DB_PASSWORD, DB_HOST).then(() => {
 
       // Manually move 'B10' to the end of the array
       const b10Index = formattedSlots.findIndex(
-        (slot) => slot.Lot_Name === "B10"
+        (slot) => slot.lotName === "B10"
       );
       if (b10Index !== -1) {
         const b10 = formattedSlots.splice(b10Index, 1);
@@ -91,17 +91,17 @@ database.connect(DB_USERNAME, DB_PASSWORD, DB_HOST).then(() => {
       }
 
       const formattedData = formattedSlots.reduce((acc, slot) => {
-        // Group the data by lot_name
-        if (!acc[slot.lot_name]) {
-          acc[slot.lot_name] = [];
+        // Group the data by lotName
+        if (!acc[slot.lotName]) {
+          acc[slot.lotName] = [];
         }
-        acc[slot.lot_name].push(slot);
+        acc[slot.lotName].push(slot);
         return acc;
       }, {});
-
+      
       for (const lotName in formattedData) {
         console.table(formattedData[lotName], [
-          "Lot_Name",
+          "lotName",
           "Cropped_Photo_Id_Num",
           "Prediction_Class",
           "Confidence",
